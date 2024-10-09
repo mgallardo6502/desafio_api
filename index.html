@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <script src=" https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js "></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <hr />
+    <h1>Conversor de monedas</h1>
+    <hr />
+    <div id="converter">
+      <h3>Pesos CLP</h3>
+      <input id="clpInput" type="text" />
+      <h5>Moneda a convertir:</h5>
+      <select name="currency" id="currency">
+        <option value="uf">UF</option>
+        <option value="ivp">IVP</option>
+        <option value="usd">Dolar</option>
+        <option value="euro">Euro</option>
+        <option value="ipc">IPC</option>
+        <option value="utm">UTM</option>
+        <option value="iamcec">IMACEC</option>
+        <option value="tpm">TPM</option>
+        <option value="bitcoin">Bitcoin</option>
+      </select>
+      <button id="convert">Buscar</button>
+      <span id="result"></span>
+    </div>
+    <canvas class="myChart"></canvas>
+    <script src="./assets/js/code.js"></script>
+  </body>
+</html>

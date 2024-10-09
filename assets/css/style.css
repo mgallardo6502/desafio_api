@@ -1,0 +1,14 @@
+h1 {
+  text-align: center;
+}
+
+#converter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  background-color: skyblue;
+  width: 500px;
+  height: 200px;
+}
