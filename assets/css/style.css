@@ -1,5 +1,15 @@
 h1 {
   text-align: center;
+  font-size: 3em;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+h3 {
+  font-size: 2em;
+}
+
+h5 {
+  font-size: 1em;
 }
 
 #converter {
@@ -10,5 +20,16 @@ h1 {
   margin: auto;
   background-color: skyblue;
   width: 500px;
-  height: 200px;
+  height: 300px;
+  border-radius: 15px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+select {
+  margin-bottom: 10px;
+}
+
+button {
+  margin-bottom: 10px;
 }

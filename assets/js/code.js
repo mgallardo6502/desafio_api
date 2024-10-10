@@ -3,31 +3,73 @@
 const btnConvert = document.getElementById("convert");
 const resultSpan = document.getElementById("result");
 const apiURL = "https://mindicador.cl/api/";
+const myChart = document.getElementById("myChart");
 
-btnConvert.addEventListener("click", function () {
-  renderCurrency();
+btnConvert.addEventListener("click", async function () {
+  const clpValue = document.getElementById("clpInput");
+  const currencyOption = document.getElementById("currency");
+  renderCurrency(clpValue, currencyOption);
+  renderChart(currencyOption);
 });
 
-async function getCurrency(currency) {
+async function getCurrency(currency = "") {
   try {
     const res = await fetch(apiURL + currency);
     const currencyData = await res.json();
-    return currencyData.serie[0].valor
+    return currencyData;
   } catch (err) {
     alert(err.message);
   }
 }
 
-async function renderCurrency() {
-  const clpValue = document.getElementById("clpInput").value;
-  const currencyOption = document.getElementById("currency").value;
-  const todayValue = await getCurrency(currencyOption);
-  if (clpValue <= 0) {
+async function renderCurrency(clpAmount, currency) {
+  const todayValue = await getCurrency(currency.value);
+
+  if (clpAmount.value <= 0) {
     resultSpan.innerHTML = "El número ingresado debe ser mayor a 0";
-  } else if (clpValue > 0) {
-    const exchangeRate = 1 / todayValue
-    resultSpan.innerHTML = `Resultado: ${clpValue * exchangeRate}`
+  } else if (clpAmount.value > 0) {
+    const exchangeRate = 1 / todayValue.serie[0].valor;
+    resultSpan.innerHTML = `Resultado: ${(
+      clpAmount.value * exchangeRate
+    ).toPrecision(4)}`;
+    clpAmount.value = "";
   } else {
-    resultSpan.innerHTML = "Debes ingresar un número"
+    resultSpan.innerHTML = "Debes ingresar solo número";
   }
+}
+
+async function renderChart(currency) {
+  const data = await getChart(currency);
+  const config = {
+    type: "line",
+    data,
+  };
+
+  myChart.style.backgroundColor = "white";
+  if (typeof Chart == undefined) {
+  } else {
+    new Chart(myChart, config);
+  }
+  
+}
+
+async function getChart(currency) {
+  const chartData = await getCurrency(currency.value);
+
+  const labels = [];
+  const data = [];
+
+  for (let i = 0; i < 10; i++) {
+    labels.push(chartData.serie[i].fecha);
+    data.push(chartData.serie[i].valor);
+  }
+
+  const datasets = [
+    {
+      label: "Fecha",
+      borderColor: "rgb(255, 99, 132)",
+      data,
+    },
+  ];
+  return { labels, datasets };
 }
